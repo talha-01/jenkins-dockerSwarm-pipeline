@@ -32,12 +32,12 @@ pipeline {
                 '''                
             }
         }
-        // stage('checking the ECR Repo') {
-        //     steps{
-        //         echo 'Checking the ECR Repo'
-        //         sh 'aws ecr describe-repositories | grep $PROJECT && echo "ECR Repo created"'
-        //     }
-        // }
+        stage('checking the ECR Repo') {
+            steps{
+                echo 'Checking the ECR Repo'
+                sh 'aws ecr describe-repositories --region us-east-1 | grep $PROJECT && echo "ECR Repo created"'
+            }
+        }
         
         stage('building Docker image'){
             steps{
@@ -76,7 +76,7 @@ pipeline {
                 sh '''aws cloudformation create-stack --stack-name my_stack \
                 --template-body file://phonebook_infrastructure_cfn_template.yaml \
                 --parameters ParameterKey=KeyPairName,ParameterValue=talha-virginia 
-                --capabilities CAPABILITY_NAMED_IAM'''
+                --capabilities CAPABILITY_NAMED_IAM --region us-east-1'''
                 // script {
                 //     int counter = 0 ;
 
