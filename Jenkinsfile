@@ -73,7 +73,7 @@ pipeline {
                 echo 'Downloading the template from GitHub'
                 sh 'wget https://raw.githubusercontent.com/talha-01/project-203-docker-swarm/master/phonebook_infrastructure_cfn_template.yaml'
                 echo 'Creating Infrastructure for the App'
-                sh '''aws cloudformation create-stack --stack-name my_stack \
+                sh '''aws cloudformation create-stack --stack-name $PROJECT \
                 --template-body file://phonebook_infrastructure_cfn_template.yaml \
                 --parameters ParameterKey=KeyPairName,ParameterValue=talha-virginia \
                 --region us-east-1 \
