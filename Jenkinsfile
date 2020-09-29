@@ -28,7 +28,7 @@ pipeline {
                   --repository-name ${PROJECT} \
                   --image-scanning-configuration scanOnPush=false \
                   --image-tag-mutability MUTABLE \
-                  --region us-east-1
+                  --region us-east-1 || echo 'Repo already exists'
                 '''                
             }
         }
