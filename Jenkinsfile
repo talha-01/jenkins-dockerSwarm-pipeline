@@ -75,8 +75,9 @@ pipeline {
                 echo 'Creating Infrastructure for the App'
                 sh '''aws cloudformation create-stack --stack-name my_stack \
                 --template-body file://phonebook_infrastructure_cfn_template.yaml \
-                --parameters ParameterKey=KeyPairName,ParameterValue=talha-virginia 
-                --capabilities CAPABILITY_NAMED_IAM --region us-east-1'''
+                --parameters ParameterKey=KeyPairName,ParameterValue=talha-virginia \
+                --region us-east-1 \
+                --capabilities CAPABILITY_NAMED_IAM'''
                 // script {
                 //     int counter = 0 ;
 
