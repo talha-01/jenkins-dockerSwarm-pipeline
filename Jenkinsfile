@@ -12,8 +12,8 @@ pipeline {
 
 
     stages {
-        stage('creating ECR Repo') {
-            steps {
+        stage('creating ECR Repo'){
+            steps{
                 echo 'creating ECR Repo'
                 sh '''
                 aws ecr create-repository \
@@ -23,14 +23,14 @@ pipeline {
                   --region us-east-1
                 '''                
             }
-            steps {
+            steps{
                 echo 'Checking the ECR Repo'
                 sh 'aws ecr describe-repositories | grep $PROJECT && echo "ECR Repo created"'
             }
         }
         
-        stage('building Docker image') {
-            steps {
+        stage('building Docker image'){
+            steps{
                 echo 'Building Docker image'
                 sh "docker build -t $APP_NAME:$REPO_VERSION $DOCKERFILE_URL"
                 sh "docker tag $APP_NAME:$REPO_VERSION $APP_NAME:latest"
@@ -41,21 +41,21 @@ pipeline {
             }
         }
 
-        stage('pushing Docker image to ECR Repo') {
+        stage('pushing Docker image to ECR Repo'){
             steps {
                 echo 'Pushing Docker image to ECR Repo'
                 sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 282594292356.dkr.ecr.us-east-1.amazonaws.com'
                 sh 'docker push $APP_NAME:$REPO_VERSION'
                 sh 'docker push $APP_NAME:latest'
             }
-            steps {
+            steps{
                 echo 'Checking the Image'
                 sh 'aws ecr describe-images --repository-name $PROJECT | grep $REPO_VERSION && echo "The Image verified"'
             }
         }
 
-        stage('creating infrastructure for the app') {
-            steps {
+        stage('creating infrastructure for the app'){
+            steps{
                 echo 'Downloading the template from GitHub'
                 sh 'wget https://raw.githubusercontent.com/talha-01/project-203-docker-swarm/master/phonebook_infrastructure_cfn_template.yaml'
                 echo 'Creating Infrastructure for the App'
