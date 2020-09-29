@@ -12,6 +12,12 @@ pipeline {
 
 
     stages {
+        stage('testing') {
+            echo 'test'
+            sh 'echo test'
+        }
+
+
         stage('creating ECR Repo'){
             steps{
                 echo 'creating ECR Repo'
