@@ -28,7 +28,7 @@ pipeline {
                   --repository-name ${PROJECT} \
                   --image-scanning-configuration scanOnPush=false \
                   --image-tag-mutability MUTABLE \
-                  --region us-east-1 || echo "Repo already exists"
+                  --region us-east-1
                 '''                
             }
         }
@@ -61,12 +61,12 @@ pipeline {
                 sh 'docker push $APP_NAME:latest'
             }
         }
-        // stage('checking the images') {
-        //     steps{
-        //         echo 'Checking the Image'
-        //         sh 'aws ecr describe-images --repository-name $PROJECT | grep $REPO_VERSION && echo "The Image verified"'
-        //     }
-        // }
+        stage('checking the images') {
+            steps{
+                echo 'Checking the Image'
+                sh 'aws ecr describe-images --repository-name $PROJECT | grep $REPO_VERSION && echo "The Image verified"'
+            }
+        }
 
         stage('creating infrastructure for the app'){
             steps{
