@@ -118,10 +118,10 @@ pipeline {
         //                 //try catch block with groovy/java
         //                 //sh 'curl ip:8080 ...' break
         //                 //failure ... sleep(5)
-                    }
-                }
-            }
-        }
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     post {
