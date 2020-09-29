@@ -31,10 +31,12 @@ pipeline {
                   --region us-east-1
                 '''                
             }
-            // steps{
-            //     echo 'Checking the ECR Repo'
-            //     sh 'aws ecr describe-repositories | grep $PROJECT && echo "ECR Repo created"'
-            // }
+        }
+        stage('checking the ECR Repo') {
+            steps{
+                echo 'Checking the ECR Repo'
+                sh 'aws ecr describe-repositories | grep $PROJECT && echo "ECR Repo created"'
+            }
         }
         
         stage('building Docker image'){
@@ -43,6 +45,8 @@ pipeline {
                 sh "docker build -t $APP_NAME:$REPO_VERSION $DOCKERFILE_URL"
                 sh "docker tag $APP_NAME:$REPO_VERSION $APP_NAME:latest"
             }
+        }
+        stage('Listing images') {
             steps{
                 echo 'Listing Images'
                 sh 'docker images'
@@ -56,6 +60,8 @@ pipeline {
                 sh 'docker push $APP_NAME:$REPO_VERSION'
                 sh 'docker push $APP_NAME:latest'
             }
+        }
+        stage('checking the images') {
             steps{
                 echo 'Checking the Image'
                 sh 'aws ecr describe-images --repository-name $PROJECT | grep $REPO_VERSION && echo "The Image verified"'
