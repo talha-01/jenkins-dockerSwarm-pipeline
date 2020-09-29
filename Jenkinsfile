@@ -31,10 +31,10 @@ pipeline {
                   --region us-east-1
                 '''                
             }
-            steps{
-                echo 'Checking the ECR Repo'
-                sh 'aws ecr describe-repositories | grep $PROJECT && echo "ECR Repo created"'
-            }
+            // steps{
+            //     echo 'Checking the ECR Repo'
+            //     sh 'aws ecr describe-repositories | grep $PROJECT && echo "ECR Repo created"'
+            // }
         }
         
         stage('building Docker image'){
