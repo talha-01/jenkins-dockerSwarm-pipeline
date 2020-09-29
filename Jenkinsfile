@@ -79,7 +79,24 @@ pipeline {
             }
         }
 
-?
+        // stage('test the Viz App') {
+        //     steps {
+        //         echo 'test the Viz App'
+        //         script {
+        //             int counter = 0 ;
+
+        //             while ( counter < 3 ) {
+        //                 println('Counting... ' +counter);
+        //                 sleep(2)
+        //                 counter++;
+        //                 //try catch block with groovy/java
+        //                 //sh 'curl ip:8080 ...' break
+        //                 //failure ... sleep(5)
+        //             }
+        //         }
+        //     }
+        // }
+
         // stage('deploying the application') {
         //     steps {
         //         echo 'deploying the application'
