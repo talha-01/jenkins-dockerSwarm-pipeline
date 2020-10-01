@@ -30,7 +30,7 @@ pipeline {
         stage('CONTROL REPO') {
             steps{
                 echo 'Checking the ECR repo'
-                sh 'aws ecr describe-repositories --region us-east-1 | grep $PROJECT && echo "ECR Repo created"'
+                sh 'aws ecr describe-repositories --region us-east-1 | grep $PROJECT && echo "Using existing repo"'
             }
         }
         
@@ -81,7 +81,7 @@ pipeline {
                 --template-body file://phonebook_infrastructure_cfn_template.yaml \
                 --parameters ParameterKey=KeyPairName,ParameterValue=talha-virginia \
                 --region us-east-1 \
-                --capabilities CAPABILITY_NAMED_IAM || echo "passed"'''
+                --capabilities CAPABILITY_NAMED_IAM || echo "Using existing cluster"'''
             }
         }
 
