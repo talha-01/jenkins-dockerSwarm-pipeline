@@ -1,4 +1,4 @@
-# Create Docker Swarm Infrastructure and Deploy Flask Application
+# Create Docker Swarm Infrastructure and Deploy Flask Application with Jenkins
 This project creates a Docker Swarm cluster and deploys an application in this order:
 
 - Creates a repo in the ECR,
