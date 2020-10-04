@@ -212,6 +212,7 @@ EOF"
 
         failure {
             echo 'Something went wrong. Check the log files'
+            sh 'aws cloudformation delete-stack --region us-east-1 --stack-name $PROJECT'
         }
 
         success { 
